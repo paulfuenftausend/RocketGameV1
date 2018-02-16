@@ -50,6 +50,7 @@ SpriteBatch batch;
 				-600);
 		ball2.ball.setScale(0.05f);
 		
+		//Sterne erstellen, Position zuweisen, und resizen
 		star.star = new Sprite(imgStar);
 		star2.star = new Sprite(imgStar);
 		star3.star = new Sprite(imgStar);
@@ -61,6 +62,12 @@ SpriteBatch batch;
 		star.star.setScale(0.05f);
 		star2.star.setScale(0.05f);
 		star3.star.setScale(0.05f);
+		
+		cannon.sprite = new Sprite(imgCannon);
+		//cannon.setBounds(Gdx.graphics.getPpcX(), Gdx.graphics.getPpcY(), Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+		cannon.sprite.setPosition(Gdx.graphics.getWidth()/2 - ball2.ball.getWidth()/2,
+				-600);
+		//cannon.sprite.setOrigin(((Sprite) Gdx.graphics).getOriginX()-(Gdx.graphics.getWidth()/8), ((Sprite) Gdx.graphics).getOriginY());
 		
 	}
 
@@ -76,6 +83,7 @@ SpriteBatch batch;
 		star3.star.draw(batch);
 		ball2.ball.draw(batch);	
 		cannon.sprite.draw(batch);
+		//cannon.drehen();
 		ball2.movement2();
 		star.tastenMovement();
 		star2.tastenMovement();
@@ -88,5 +96,7 @@ SpriteBatch batch;
 		batch.dispose();
 		imgBackground.dispose();
 		imgBall.dispose();
+		imgCannon.dispose();
+		imgStar.dispose();
 	}
 }

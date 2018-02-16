@@ -15,32 +15,41 @@ public class Kannone {
 	public void main(String[] args) {
 		// TODO Auto-generated method stub
 		
-		//setBounds(sprite.getX(), sprite.getY(), sprite.getWidth(),sprite.getHeight());
+	}
+		/*setBounds(sprite.getX(), sprite.getY(), sprite.getWidth(),sprite.getHeight());
 		sprite.setPosition(0-sprite.getWidth()/2, 400-(sprite.getHeight()/2));
-		sprite.setOrigin(sprite.getOriginX()-(sprite.getWidth()/8), sprite.getOriginY());
+		sprite.setOrigin(sprite.getOriginX()-(sprite.getWidth()/8), sprite.getOriginY());*/
 		
 	/*	this.addListener(new InputListener() {
 			@Override
 			public boolean keyDown(InputEvent event, int keycode) {*/
-		
+		public void drehen()
+		{
 				if(Gdx.input.isKeyPressed(Input.Keys.W)) {
 					if(sprite.getRotation()<77f) {
 						sprite.rotate(2f);
-					}	
+					}
+				}
 				
 				if(Gdx.input.isKeyPressed(Input.Keys.S)) {
 					if(sprite.getRotation()>-77f) {
 						sprite.rotate(-2f);
 					}	
 				}
-				//if(Gdx.input.isKeyPressed((Input.Keys.SPACE)){
-					
-				//}
-						
-				//return super.keyDown(event, keycode);
+				if (Gdx.input.isKeyPressed(Input.Keys.I))
+					System.out.println(sprite.getX() + " " + sprite.getY());
+				
+				if (sprite.getX() <= -350)
+					sprite.translateX(5);
+				if (sprite.getX() >= 575)
+					sprite.translateX(-5);	
+				if (sprite.getY() <= -620)
+					sprite.translateY(5);
+				if (sprite.getY() >= -130)
+					sprite.translateY(-5);
 				
 			}
-		};		
+		}		
 
 	
 
@@ -53,6 +62,6 @@ public class Kannone {
 	public void act(float delta) {
 		super.act(delta);
 	}*/
-	}
+	
 
 
