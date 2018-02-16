@@ -13,6 +13,7 @@ SpriteBatch batch;
 	Texture imgBackground;
 	Texture imgBall;
 	Texture imgStar;
+	Texture imgCannon;
 	
 	Sprite background;
 	
@@ -22,6 +23,8 @@ SpriteBatch batch;
 	Star star2;
 	Star star3;
 	
+	Kannone cannon;
+	
 	
 	@Override
 	public void create () {
@@ -29,12 +32,14 @@ SpriteBatch batch;
 		imgBackground = new Texture("2012-05-25 Virgo Haufen_DBE_ATWT_BN_CC_L_DONE_modified.jpg");
 		imgBall = new Texture("rocket-147466_1280.png");
 		imgStar = new Texture("Gold_Star.svg.png");
+		imgCannon = new Texture("Angreifer.png");
 		
 		background = new Sprite(imgBackground);
 		ball2 = new Actor();
 		star = new Star();
 		star2 = new Star();
 		star3 = new Star();
+		cannon = new Kannone();
 		
 		background.setPosition(
 				Gdx.graphics.getWidth()/2 - background.getWidth()/2,
@@ -69,7 +74,8 @@ SpriteBatch batch;
 		star.star.draw(batch);
 		star2.star.draw(batch);
 		star3.star.draw(batch);
-		ball2.ball.draw(batch);		
+		ball2.ball.draw(batch);	
+		cannon.sprite.draw(batch);
 		ball2.movement2();
 		star.tastenMovement();
 		star2.tastenMovement();
