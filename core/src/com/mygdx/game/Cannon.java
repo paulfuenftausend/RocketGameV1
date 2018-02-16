@@ -5,9 +5,9 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 
 public class Cannon {
 	
-	Sprite sprite;
+	Sprite sprite; //testibesti
 
-public Angreifer() {
+public Cannon() {
 		
 		setBounds(sprite.getX(), sprite.getY(), sprite.getWidth(),sprite.getHeight());
 		sprite.setPosition(0-sprite.getWidth()/2, 400-(sprite.getHeight()/2));
