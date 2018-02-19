@@ -65,9 +65,9 @@ SpriteBatch batch;
 		
 		cannon.sprite = new Sprite(imgCannon);
 		//cannon.setBounds(Gdx.graphics.getPpcX(), Gdx.graphics.getPpcY(), Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-		cannon.sprite.setPosition(Gdx.graphics.getWidth()/2 - ball2.ball.getWidth()/2,
-				-600);
-		//cannon.sprite.setOrigin(((Sprite) Gdx.graphics).getOriginX()-(Gdx.graphics.getWidth()/8), ((Sprite) Gdx.graphics).getOriginY());
+
+		cannon.sprite.setPosition(0-cannon.sprite.getWidth()/2, Gdx.graphics.getHeight()/2-cannon.sprite.getHeight()/2);
+		cannon.sprite.setOrigin(cannon.sprite.getOriginX()-(cannon.sprite.getWidth()/8), cannon.sprite.getOriginY());
 		
 	}
 

@@ -25,13 +25,13 @@ public class Kannone {
 			public boolean keyDown(InputEvent event, int keycode) {*/
 		public void drehen()
 		{
-				if(Gdx.input.isKeyPressed(Input.Keys.W)) {
+				if(Gdx.input.isKeyPressed(Input.Keys.UP)) {
 					if(sprite.getRotation()<77f) {
 						sprite.rotate(2f);
 					}
 				}
 				
-				if(Gdx.input.isKeyPressed(Input.Keys.S)) {
+				if(Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
 					if(sprite.getRotation()>-77f) {
 						sprite.rotate(-2f);
 					}	
@@ -39,14 +39,14 @@ public class Kannone {
 				if (Gdx.input.isKeyPressed(Input.Keys.I))
 					System.out.println(sprite.getX() + " " + sprite.getY());
 				
-				if (sprite.getX() <= -350)
+				/*if (sprite.getX() <= -350)
 					sprite.translateX(5);
 				if (sprite.getX() >= 575)
 					sprite.translateX(-5);	
 				if (sprite.getY() <= -620)
 					sprite.translateY(5);
 				if (sprite.getY() >= -130)
-					sprite.translateY(-5);
+					sprite.translateY(-5);     */
 				
 			}
 		}		
