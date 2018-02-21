@@ -30,7 +30,7 @@ SpriteBatch batch;
 	public void create () {
 		batch = new SpriteBatch();
 		imgBackground = new Texture("2012-05-25 Virgo Haufen_DBE_ATWT_BN_CC_L_DONE_modified.jpg");
-		imgBall = new Texture("rocket-147466_1280.png");
+		imgBall = new Texture("SpaceShip Sprite.png");
 		imgStar = new Texture("Gold_Star.svg.png");
 		imgCannon = new Texture("Angreifer.png");
 		
@@ -47,8 +47,8 @@ SpriteBatch batch;
 		background.setScale(0.3f);
 		ball2.ball = new Sprite(imgBall);
 		ball2.ball.setPosition(Gdx.graphics.getWidth()/2 - ball2.ball.getWidth()/2,
-				-600);
-		ball2.ball.setScale(0.05f);
+				0);
+		//ball2.ball.setScale(0.05f);
 		
 		//Sterne erstellen, Position zuweisen, und resizen
 		star.star = new Sprite(imgStar);
@@ -78,16 +78,17 @@ SpriteBatch batch;
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		batch.begin();
 		background.draw(batch);
+		cannon.sprite.draw(batch);
 		star.star.draw(batch);
 		star2.star.draw(batch);
 		star3.star.draw(batch);
 		ball2.ball.draw(batch);	
-		cannon.sprite.draw(batch);
-		//cannon.drehen();
+		
+		cannon.drehen();
 		ball2.movement2();
-		star.tastenMovement();
-		star2.tastenMovement();
-		star3.tastenMovement();
+		//star.tastenMovement();
+		//star2.tastenMovement();
+		//star3.tastenMovement();
 		batch.end();
 	}
 	
