@@ -32,13 +32,13 @@ public class Star {
 			star.setPosition((float) ((float)Math.random()*-(Gdx.graphics.getWidth()*0.55)), (float) ((float)Math.random()*-Gdx.graphics.getHeight()*0.75));
 		
 		//Randbegrenzung
-		if (star.getX() <= -475)
+		if (star.getX() <= 0)
 			star.translateX(movementSpeed);
-		if (star.getX() >= 440)
+		if (star.getX() >= 940)
 			star.translateX(-movementSpeed);	
-		if (star.getY() <= -475)
+		if (star.getY() <= 0)
 			star.translateY(movementSpeed);
-		if (star.getY() >= 20)
+		if (star.getY() >= 540-star.getHeight())
 			star.translateY(-movementSpeed);
 	}
 
