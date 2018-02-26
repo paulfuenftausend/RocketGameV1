@@ -8,7 +8,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 
 
 
-public class Kannone {
+public class Kannone extends Sprite{
 	
 	Sprite sprite;
 

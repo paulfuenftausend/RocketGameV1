@@ -6,6 +6,8 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.World;
 
 public class RocketGame extends ApplicationAdapter {
 SpriteBatch batch;
@@ -25,6 +27,8 @@ SpriteBatch batch;
 	
 	Kannone cannon;
 	
+	World world;
+	
 	
 	@Override
 	public void create () {
@@ -35,11 +39,13 @@ SpriteBatch batch;
 		imgCannon = new Texture("Turret Sprite.png");
 		
 		background = new Sprite(imgBackground);
-		ball2 = new Actor();
-		star = new Star();
-		star2 = new Star();
-		star3 = new Star();
+		world = new World(new Vector2(0,0), true);
+		ball2 = new Actor(world);
+		star = new Star(world);
+		star2 = new Star(world);
+		star3 = new Star(world);
 		cannon = new Kannone();
+		
 		
 		background.setPosition(
 				Gdx.graphics.getWidth()/2 - background.getWidth()/2,
@@ -82,6 +88,11 @@ SpriteBatch batch;
 		star3.star.draw(batch);
 		cannon.sprite.draw(batch);
 		ball2.ball.draw(batch);	
+		
+		world.step(Gdx.graphics.getDeltaTime(), 1, 1);
+		
+		ball2.physischerKoerper();
+		star.physischerKoerper();
 		
 		cannon.drehen();
 		ball2.movement2();

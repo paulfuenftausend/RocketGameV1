@@ -4,21 +4,24 @@ import com.badlogic.gdx.*;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.*;
 
-public class Actor {
+public class Actor extends Sprite{
 
+	public Body body;
+	public World world;
 	
 	Sprite ball;
 	
 	float movementSpeed = 3;
 	
 	
-	public void main(String[] args) {
-		// TODO Auto-generated method stub
-
+	public Actor(World world2) {
+		// TODO Auto-generated constructor stub
+		this.world = world2;
 	}
-	
-	public void movement2() //Koordiantensysteme verschoben 0,0 input = -350, -75 Sprite
+
+	public void movement2()
 	{
 		
 		float ballMittelX = ball.getX()+ball.getWidth()/2;
@@ -92,6 +95,27 @@ public class Actor {
 			rotation +=360;}
 		
 		ball.setRotation(rotation);
+	}
+	
+	public void physischerKoerper()
+	{
+		BodyDef bodyDef = new BodyDef();
+		
+		bodyDef.type = BodyDef.BodyType.DynamicBody; //von allen Kräften beeinflusst (Gravitation, schieben, ziehen...)
+		bodyDef.position.set(getX(), getY()); //Körper an die selbe Stelle wie Textur legen
+		
+		body = world.createBody(bodyDef);
+		
+		PolygonShape shape = new PolygonShape();
+		shape.setAsBox(ball.getWidth()/2, ball.getHeight()/2);
+		
+		FixtureDef fixtureDef = new FixtureDef();
+		fixtureDef.shape = shape;
+		
+		body.createFixture(fixtureDef);
+		shape.dispose();
+		
+		
 	}
 
 }

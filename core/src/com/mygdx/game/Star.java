@@ -2,14 +2,29 @@ package com.mygdx.game;
 
 import com.badlogic.gdx.*;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.physics.box2d.Body;
+import com.badlogic.gdx.physics.box2d.BodyDef;
+import com.badlogic.gdx.physics.box2d.FixtureDef;
+import com.badlogic.gdx.physics.box2d.PolygonShape;
+import com.badlogic.gdx.physics.box2d.World;
 
-public class Star {
+public class Star extends Sprite{
 	
 	Sprite star;
+	
+	World world;
+	Body body;
 
 	float movementSpeed = 2;
-	public void main(String[] args) {
-		// TODO Auto-generated method stub
+	public Star(World world2) {
+		// TODO Auto-generated constructor stub
+		this.world = world2;
+	}
+
+	public void main(World world) {
+		tastenMovement();
+		physischerKoerper();
+		
 
 	}
 	
@@ -40,6 +55,25 @@ public class Star {
 			star.translateY(movementSpeed);
 		if (star.getY() >= 540-star.getHeight())
 			star.translateY(-movementSpeed);
+	}
+	
+	public void physischerKoerper()
+	{
+		BodyDef bodyDef = new BodyDef();
+		
+		bodyDef.type = BodyDef.BodyType.DynamicBody; //von allen Kräften beeinflusst (Gravitation, schieben, ziehen...)
+		bodyDef.position.set(getX(), getY()); //Körper an die selbe Stelle wie Textur legen
+		
+		body = world.createBody(bodyDef);
+		
+		PolygonShape shape = new PolygonShape();
+		shape.setAsBox(star.getWidth()/2, star.getHeight()/2);
+		
+		FixtureDef fixtureDef = new FixtureDef();
+		fixtureDef.shape = shape;
+		
+		body.createFixture(fixtureDef);
+		shape.dispose();
 	}
 
 }
