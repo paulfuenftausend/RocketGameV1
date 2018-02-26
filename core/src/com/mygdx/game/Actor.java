@@ -1,7 +1,5 @@
 package com.mygdx.game;
 
-import java.util.Vector;
-
 import com.badlogic.gdx.*;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.MathUtils;
@@ -83,21 +81,16 @@ public class Actor {
 	
 	public void drehen()
 	{
-		float InputX = Gdx.input.getX();
-		float InputY = Gdx.input.getY()+540;
-		Vector2 position = new Vector2();
-		Vector2 vec = new Vector2();
+		Vector2 input = new Vector2();
+		Vector2 actor = new Vector2();
 		
-		vec.set((int) (Gdx.input.getX() - position.x), InputY - position.y).nor();
-	    position.x += vec.x * 50f;
-	    position.y += vec.y * 50f; 
+		actor.set(ball.getX() - ball.getWidth()/2, ball.getY()+ball.getHeight());
+		input.set(Gdx.input.getX(), -(Gdx.input.getY()-540));
 		
-		float rotation =  MathUtils.radiansToDegrees * MathUtils.atan2(InputY - position.y , InputX - position.x);
+		float rotation = input.angle(actor);
+		if(rotation < 0){
+			rotation +=360;}
 		
-		if (rotation < 0)
-		{
-			rotation += 360;
-		}
 		ball.setRotation(rotation);
 	}
 
