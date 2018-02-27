@@ -42,8 +42,6 @@ SpriteBatch batch;
 		world = new World(new Vector2(0,0), true);
 		ball2 = new Actor(world);
 		star = new Star(world);
-		star2 = new Star(world);
-		star3 = new Star(world);
 		cannon = new Kannone();
 		
 		
@@ -51,27 +49,19 @@ SpriteBatch batch;
 				Gdx.graphics.getWidth()/2 - background.getWidth()/2,
 				Gdx.graphics.getHeight()/2 - background.getHeight()/2);
 		background.setScale(0.3f);
+		
 		ball2.ball = new Sprite(imgBall);
 		ball2.ball.setPosition(Gdx.graphics.getWidth()/2 - ball2.ball.getWidth()/2, 0);
 		
-		//Sterne erstellen, Position zuweisen, und resizen
-		star.star = new Sprite(imgStar);
-		star2.star = new Sprite(imgStar);
-		star3.star = new Sprite(imgStar);
 		
-		star.star.setPosition(50,50);
-		star2.star.setPosition((float) ((float)Math.random()*-Gdx.graphics.getWidth()*0.5), (float) ((float)Math.random()*-Gdx.graphics.getHeight()*0.5));
-		star3.star.setPosition((float) ((float)Math.random()*-Gdx.graphics.getWidth()*0.5), (float) ((float)Math.random()*-Gdx.graphics.getHeight()*0.5));
-		
+		star.star = new Sprite(imgStar);	
+		star.star.setPosition(50,50);		
 		star.star.setScale(2f);
-		star2.star.setScale(2f);
-		star3.star.setScale(2f);
+		
 		
 		cannon.sprite = new Sprite(imgCannon);
-
 		cannon.sprite.setPosition(0-cannon.sprite.getWidth()/2, Gdx.graphics.getHeight()/2-cannon.sprite.getHeight()/2);
-		cannon.sprite.setOrigin(cannon.sprite.getOriginX()-(cannon.sprite.getWidth()/8), cannon.sprite.getOriginY());
-		
+		cannon.sprite.setOrigin(cannon.sprite.getOriginX()-(cannon.sprite.getWidth()/8), cannon.sprite.getOriginY());	
 		cannon.sprite.setScale(4f);
 		
 	}
@@ -82,24 +72,18 @@ SpriteBatch batch;
 		Gdx.gl.glClearColor(1, 1, 1, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		batch.begin();
+		
 		background.draw(batch);
 		star.star.draw(batch);
-		star2.star.draw(batch);
-		star3.star.draw(batch);
 		cannon.sprite.draw(batch);
 		ball2.ball.draw(batch);	
 		
 		world.step(Gdx.graphics.getDeltaTime(), 1, 1);
 		
-		ball2.physischerKoerper();
-		star.physischerKoerper();
+		ball2.doStuff();
+		star.doStuff();
 		
 		cannon.drehen();
-		ball2.movement2();
-		//ball2.drehen();
-		star.tastenMovement();
-		//star2.tastenMovement();
-		//star3.tastenMovement();
 		batch.end();
 	}
 	

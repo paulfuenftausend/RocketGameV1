@@ -20,14 +20,21 @@ public class Actor extends Sprite{
 		// TODO Auto-generated constructor stub
 		this.world = world2;
 	}
+	
+	public void doStuff()
+	{
+		movement();
+		//drehen();
+		physischerKoerper();
+	}
 
-	public void movement2()
+	public void movement()
 	{
 		
 		float ballMittelX = ball.getX()+ball.getWidth()/2;
 		float ballObenY = ball.getY()+ball.getHeight();
 		
-		if((Gdx.input.getX()) != ballMittelX+movementSpeed || Gdx.input.getX() != ballMittelX-movementSpeed) //Bewegung zur Maus hin
+		if((Gdx.input.getX()) != ballMittelX+movementSpeed || Gdx.input.getX() != ballMittelX-movementSpeed)
 		{
 			if((Gdx.input.getX()) > ballMittelX){
 				ball.translateX(movementSpeed);
@@ -36,7 +43,7 @@ public class Actor extends Sprite{
 			}
 		}
 		
-		if(-(Gdx.input.getY()+540) != ballObenY+movementSpeed || -(Gdx.input.getY()+550) != ballObenY-movementSpeed) //Bewegung zur Maus hin
+		if(-(Gdx.input.getY()+540) != ballObenY+movementSpeed || -(Gdx.input.getY()+550) != ballObenY-movementSpeed) 
 		{
 			if(-(Gdx.input.getY()-540) > ballObenY){
 				ball.translateY(movementSpeed);
@@ -82,7 +89,7 @@ public class Actor extends Sprite{
 			ball.translateY(-movementSpeed);
 	}
 	
-	public void drehen()
+	public void drehen() //theoretisch ausrichtung vom sprite zur maus
 	{
 		Vector2 input = new Vector2();
 		Vector2 actor = new Vector2();
@@ -97,7 +104,7 @@ public class Actor extends Sprite{
 		ball.setRotation(rotation);
 	}
 	
-	public void physischerKoerper()
+	public void physischerKoerper() //erstellung eines Physischen Körpers um Berührung zu registrieren
 	{
 		BodyDef bodyDef = new BodyDef();
 		
@@ -117,6 +124,32 @@ public class Actor extends Sprite{
 		
 		
 	}
-
+	
+	public void movement2()
+	{
+		
+		float ballMittelX = body.getPosition().x+ball.getWidth()/2;
+		float ballObenY = body.getPosition().y+ball.getHeight();
+		
+		if((Gdx.input.getX()) != ballMittelX+movementSpeed || Gdx.input.getX() != ballMittelX-movementSpeed) //Bewegung zur Maus hin
+		{
+			if((Gdx.input.getX()) > ballMittelX){
+				body.applyForceToCenter(movementSpeed, 0, true);
+			}else if((Gdx.input.getX()) < ballMittelX){
+				body.applyForceToCenter(-movementSpeed, 0, true);
+			}
+		}
+		
+		if(-(Gdx.input.getY()+540) != ballObenY+movementSpeed || -(Gdx.input.getY()+550) != ballObenY-movementSpeed) //Bewegung zur Maus hin
+		{
+			if(-(Gdx.input.getY()-540) > ballObenY){
+				body.applyForceToCenter(0,movementSpeed, true);
+			}else if(-(Gdx.input.getY()-540) < ballObenY){
+				body.applyForceToCenter(0, -movementSpeed, true);
+			}
+		}
+		this.setPosition(body.getPosition().x, body.getPosition().y);
+		tastenMovement();		
+	}
 }
 

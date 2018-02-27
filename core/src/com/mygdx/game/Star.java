@@ -20,12 +20,11 @@ public class Star extends Sprite{
 		// TODO Auto-generated constructor stub
 		this.world = world2;
 	}
-
-	public void main(World world) {
+	
+	public void doStuff()
+	{
 		tastenMovement();
 		physischerKoerper();
-		
-
 	}
 	
 	public void tastenMovement() 
