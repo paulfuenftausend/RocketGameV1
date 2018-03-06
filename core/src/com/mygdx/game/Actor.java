@@ -77,6 +77,8 @@ public class Actor extends Sprite{
 			System.out.println(ball.getX() + " " + ball.getY());
 		if (Gdx.input.isKeyPressed(Input.Keys.K))
 			System.out.println(Gdx.input.getX() + " " + -(Gdx.input.getY()));
+		if(Gdx.input.isKeyPressed(Input.Keys.P))
+			System.out.println(body.getPosition().x);
 		
 		//Randbegrenzung
 		if (ball.getX() <= 0)

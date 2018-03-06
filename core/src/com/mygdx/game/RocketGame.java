@@ -51,6 +51,7 @@ SpriteBatch batch;
 		background.setScale(0.3f);
 		
 		ball2.ball = new Sprite(imgBall);
+		//ball2.body.setTransform(Gdx.graphics.getWidth()/2 - ball2.ball.getWidth()/2, 0, 90);
 		ball2.ball.setPosition(Gdx.graphics.getWidth()/2 - ball2.ball.getWidth()/2, 0);
 		
 		
@@ -76,14 +77,13 @@ SpriteBatch batch;
 		background.draw(batch);
 		star.star.draw(batch);
 		cannon.sprite.draw(batch);
-		ball2.ball.draw(batch);	
-		
-		world.step(Gdx.graphics.getDeltaTime(), 1, 1);
+		ball2.ball.draw(batch);			
 		
 		ball2.doStuff();
 		star.doStuff();
 		
 		cannon.drehen();
+		world.step(Gdx.graphics.getDeltaTime(), 1, 1);
 		batch.end();
 	}
 	
