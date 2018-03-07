@@ -1,7 +1,10 @@
 package com.mygdx.game;
 
+import java.util.ArrayList;
+
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -29,6 +32,12 @@ SpriteBatch batch;
 	
 	World world;
 	
+	//Shooting
+		ArrayList<Bullets> bullets;
+		Vector2 vector;
+		float fireRate = 400000000;
+		float lastShoot;
+		
 	
 	@Override
 	public void create () {
@@ -43,6 +52,10 @@ SpriteBatch batch;
 		ball2 = new Actor(world);
 		star = new Star(world);
 		cannon = new Kannone();
+		//Array for bullets
+		bullets = new ArrayList<Bullets>();
+		batch = new SpriteBatch();
+		vector = new Vector2();
 		
 		
 		background.setPosition(
@@ -70,6 +83,27 @@ SpriteBatch batch;
 	@Override
 	public void render () {
 		
+		//Shooting code
+		vector.set(1,0);
+		vector.rotate(cannon.sprite.getRotation());
+		vector.setLength(cannon.sprite.getWidth()*2);
+		if(Gdx.input.isKeyPressed(Keys.SPACE)){
+			if(System.nanoTime()-lastShoot >= fireRate) {
+				Bullets bullet = new Bullets((0-(cannon.sprite.getWidth()/8))+vector.x,255+vector.y);
+					
+				bullet.setMovingDirection(cannon.sprite.getRotation(), (5*cannon.sprite.getWidth())/8);
+				bullet.sprite.setRotation(cannon.sprite.getRotation());
+				bullet.update(Gdx.graphics.getDeltaTime());
+				bullets.add(bullet);
+				lastShoot= System.nanoTime();
+			}
+		}
+				
+		//Update bullets
+		for(Bullets bullet : bullets){
+			bullet.update(Gdx.graphics.getDeltaTime());
+		}
+		
 		Gdx.gl.glClearColor(1, 1, 1, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		batch.begin();
@@ -83,6 +117,12 @@ SpriteBatch batch;
 		star.doStuff();
 		
 		cannon.drehen();
+		
+		//render bullets
+		for(Bullets bullet : bullets){
+			bullet.sprite.draw(batch);
+		}
+		
 		world.step(Gdx.graphics.getDeltaTime(), 1, 1);
 		batch.end();
 	}
