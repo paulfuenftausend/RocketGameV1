@@ -20,7 +20,7 @@ public class Bullets {
 	public Bullets(float x, float y) {		
 		direction = new Vector2();
 
-		texture = new Texture("C:\\Users\\Robert\\Documents\\Schule\\Inf\\FireShotSprite.png");	
+		texture = new Texture("FireShotSprite.png");	
 
 		this.x=x;
 		this.y=y;
