@@ -1,3 +1,4 @@
+//Klasse von Robert
 package com.mygdx.game;
 
 import com.badlogic.gdx.Gdx;
@@ -45,26 +46,5 @@ public class Bullets extends Sprite{
 		y += direction.y*deltaTime;
 		sprite.setPosition(x, y);
 	}
-	public void Shoot(){
-		//Shooting code
-				main.vector.set(1,0);
-				main.vector.rotate(main.cannon.sprite.getRotation());
-				main.vector.setLength(main.cannon.sprite.getWidth()*2);
-				if(Gdx.input.isKeyPressed(Input.Keys.SPACE)){
-					if(System.nanoTime()-main.lastShoot >= main.fireRate) {
-						Bullets bullet = new Bullets((0-(main.cannon.sprite.getWidth()/8))+main.vector.x,255+main.vector.y, main);
-							
-						setMovingDirection(main.cannon.sprite.getRotation(), (5*main.cannon.sprite.getWidth())/8);
-						sprite.setRotation(main.cannon.sprite.getRotation());
-						update(Gdx.graphics.getDeltaTime());
-						main.bullets.add(bullet);
-						main.lastShoot = System.nanoTime();
-					}
-				}
-						
-				//Update bullets
-				for(Bullets bullet : main.bullets){
-					bullet.update(Gdx.graphics.getDeltaTime());
-				}
-	}
+	
 }

@@ -1,3 +1,4 @@
+//Shooting von Robert, der Rest von Paul
 package com.mygdx.game;
 
 import java.util.ArrayList;
@@ -84,28 +85,82 @@ SpriteBatch batch;
 	@Override
 	public void render () {
 		
-		/*//Shooting code
+		//PoerUps
+		if(Gdx.input.isKeyPressed(Keys.NUM_1)) {
+			powerUp = 1;
+			powerUpBegin = System.nanoTime();
+		}
+		else if(Gdx.input.isKeyPressed(Keys.NUM_2)) {
+				fireRate = 300000000;
+				powerUpBegin = System.nanoTime();
+		}
+		else {
+			if(System.nanoTime() - powerUpBegin >= powerUpTime ) {
+				powerUp = 0;
+				fireRate = 400000000;
+			}	
+			
+		}
+			
+		//Shooting code
 		vector.set(1,0);
 		vector.rotate(cannon.sprite.getRotation());
 		vector.setLength(cannon.sprite.getWidth()*2);
-		if(Gdx.input.isKeyPressed(Input.Keys.SPACE)){
-			if(System.nanoTime()-lastShoot >= fireRate) {
-				Bullets bullet = new Bullets((0-(cannon.sprite.getWidth()/8))+vector.x,255+vector.y, this);
+		if(Gdx.input.isKeyPressed(Keys.SPACE)){
+			switch(powerUp) {
+			case 0:
+				if(System.nanoTime()-lastShoot >= fireRate) {
+					Bullets bullet = new Bullets((0-(cannon.sprite.getWidth()/8))+vector.x,255+vector.y);
+							
+					bullet.setMovingDirection(cannon.sprite.getRotation(), (5*cannon.sprite.getWidth())/8);
+					bullet.sprite.setRotation(cannon.sprite.getRotation());
+					bullet.update(Gdx.graphics.getDeltaTime());
+					bullets.add(bullet);
+					lastShoot= System.nanoTime();
+				}
+					break;
+			case 1:
+				if(System.nanoTime()-lastShoot >= fireRate) {
+					Bullets bullet = new Bullets((0-(cannon.sprite.getWidth()/8))+vector.x,255+vector.y);
+							
+					bullet.setMovingDirection(cannon.sprite.getRotation(), (5*cannon.sprite.getWidth())/8);
+					bullet.sprite.setRotation(cannon.sprite.getRotation());
+					bullet.update(Gdx.graphics.getDeltaTime());
+					bullets.add(bullet);
+							
+					Bullets bullet1 = new Bullets((0-(cannon.sprite.getWidth()/8))+vector.x,255+vector.y);
 					
-				bullet.setMovingDirection(cannon.sprite.getRotation(), (5*cannon.sprite.getWidth())/8);
-				bullet.sprite.setRotation(cannon.sprite.getRotation());
-				bullet.update(Gdx.graphics.getDeltaTime());
-				bullets.add(bullet);
-				lastShoot= System.nanoTime();
+					bullet1.setMovingDirection(cannon.sprite.getRotation()+10, (5*cannon.sprite.getWidth())/8);
+					bullet1.sprite.setRotation(cannon.sprite.getRotation()+10);
+					bullet1.update(Gdx.graphics.getDeltaTime()+10);
+					bullets.add(bullet1);
+							
+			 		Bullets bullet2 = new Bullets((0-(cannon.sprite.getWidth()/8))+vector.x,255+vector.y);
+							
+					bullet2.setMovingDirection(cannon.sprite.getRotation()-10, (5*cannon.sprite.getWidth())/8);
+					bullet2.sprite.setRotation(cannon.sprite.getRotation()-10);
+					bullet2.update(Gdx.graphics.getDeltaTime());
+					bullets.add(bullet2);
+					lastShoot= System.nanoTime();
+					break;
+			}
 			}
 		}
 				
-		//Update bullets
+						
+		//Update and remove bullets
 		for(Bullets bullet : bullets){
-			bullet.update(Gdx.graphics.getDeltaTime());
-		}*/
-		bullet.Shoot();
-		
+			if(bullet.remove == true) {
+				removeBullets.add(bullet);
+			}
+			else {
+				bullet.update(Gdx.graphics.getDeltaTime());
+				
+			}
+		}
+		bullets.removeAll(removeBullets);
+		removeBullets.clear();
+		System.out.println(removeBullets);
 		Gdx.gl.glClearColor(1, 1, 1, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		batch.begin();
